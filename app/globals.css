@@ -179,66 +179,41 @@ h1, h2, h3, h4, h5, h6 {
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* --- Diamond shape --- */
+/* --- Logo icon --- */
 .preloader__shape-wrap {
   position: relative;
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   margin-bottom: 32px;
 }
 
-.preloader__diamond {
+.preloader__icon {
   position: absolute;
   inset: 0;
-  animation: preloaderSpin 8s linear infinite;
-  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: preloaderBreathe 2.4s ease-in-out infinite;
+  will-change: transform, opacity;
   transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
               opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.preloader__diamond--done {
-  transform: rotate(225deg) scale(0.85);
+.preloader__icon--done {
+  transform: scale(0.85);
   opacity: 0;
 }
 
-@keyframes preloaderSpin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.preloader__icon-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 20px color-mix(in srgb, var(--color-gold) 35%, transparent));
 }
 
-.preloader__diamond-face {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  border-radius: 4px;
-  will-change: transform;
-}
-
-.preloader__diamond-face--a {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
-  background: color-mix(in srgb, var(--color-gold) 30%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-gold) 35%, transparent);
-  backdrop-filter: blur(8px);
-  animation: preloaderFloat 3s ease-in-out infinite;
-}
-
-.preloader__diamond-face--b {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
-  width: 30px;
-  height: 30px;
-  background: color-mix(in srgb, var(--color-gold) 18%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-gold) 25%, transparent);
-  backdrop-filter: blur(4px);
-  animation: preloaderFloat 3s ease-in-out 0.4s infinite;
-}
-
-@keyframes preloaderFloat {
-  0%, 100% { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
-  50%      { transform: translate(-50%, -50%) rotate(45deg) scale(1.08); }
+@keyframes preloaderBreathe {
+  0%, 100% { transform: scale(1);    }
+  50%      { transform: scale(1.06); }
 }
 
 /* --- Ring --- */
@@ -358,12 +333,11 @@ h1, h2, h3, h4, h5, h6 {
 /* --- Responsive tweaks --- */
 @media (max-width: 480px) {
   .preloader__shape-wrap {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
     margin-bottom: 24px;
   }
-  .preloader__diamond-face--a { width: 34px; height: 34px; }
-  .preloader__diamond-face--b { width: 22px; height: 22px; }
+  .preloader__icon-img { width: 56px; height: 56px; }
   .preloader__pct { font-size: 11px; margin-bottom: 20px; }
   .preloader__brand { margin-bottom: 28px; }
 }

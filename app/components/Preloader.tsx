@@ -109,11 +109,17 @@ export default function Preloader() {
       {/* ── Central composition ────────────────────────── */}
       <div className="preloader__center">
 
-        {/* Abstract diamond shape */}
+        {/* Logo icon */}
         <div className="preloader__shape-wrap" aria-hidden="true">
-          <div className={`preloader__diamond ${isComplete ? "preloader__diamond--done" : ""}`}>
-            <div className="preloader__diamond-face preloader__diamond-face--a" />
-            <div className="preloader__diamond-face preloader__diamond-face--b" />
+          <div className={`preloader__icon ${isComplete ? "preloader__icon--done" : ""}`}>
+            <img
+              src="/icon.png"
+              alt=""
+              className="preloader__icon-img"
+              width={72}
+              height={72}
+              draggable={false}
+            />
           </div>
           {/* Soft ring */}
           <div className={`preloader__ring ${isComplete ? "preloader__ring--done" : ""}`} />
