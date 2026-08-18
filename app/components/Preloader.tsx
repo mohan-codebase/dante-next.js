@@ -83,7 +83,7 @@ export default function Preloader() {
   return (
     <div
       aria-live="polite"
-      aria-label={phase === "done" ? undefined : `Loading: ${progress}%`}
+      aria-label={`Loading: ${progress}%`}
       role="progressbar"
       aria-valuenow={progress}
       aria-valuemin={0}
