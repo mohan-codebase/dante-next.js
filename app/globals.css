@@ -110,6 +110,11 @@ h1, h2, h3, h4, h5, h6 {
   animation-play-state: paused;
 }
 
+@keyframes slideProgress {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
 /* ─── Premium Light Preloader ──────────────────────────────── */
 
 /* --- Surface --- */

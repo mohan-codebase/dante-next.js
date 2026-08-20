@@ -1,25 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { NAV_LINKS, LOCATIONS, EXTERNAL_LINKS } from "@/app/data/site-data";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header
-      className="sticky top-0 z-50 bg-[#f9f9f9]"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white shadow-md"
+          : "bg-transparent"
+      }`}
       role="banner"
     >
       {/* ── Main Bar ─────────────────────────────────────── */}
       <div className="mx-auto flex max-w-[var(--container-max)] items-center justify-between px-[var(--section-pad-x)] py-3">
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0" aria-label="Dante Gonzales Orthodontics — Home">
-          <img 
-            src="/images/logo/logo-by-drdantegonzales.webp" 
-            alt="Dante Gonzales Orthodontics" 
-            className="h-10 w-auto object-contain sm:h-12" 
+          <img
+            src="/images/logo/logo-by-drdantegonzales.webp"
+            alt="Dante Gonzales Orthodontics"
+            className="h-10 w-auto object-contain rounded-md bg-white px-2 py-1 sm:h-12"
           />
         </Link>
 
@@ -29,7 +43,11 @@ export default function Header() {
             <a
               key={link.label}
               href={link.href}
-              className="text-sm font-medium tracking-wide text-navy/80 transition-colors duration-200 hover:text-navy"
+              className={`text-sm font-medium tracking-wide transition-colors duration-200 ${
+                scrolled
+                  ? "text-navy/80 hover:text-navy"
+                  : "text-white/90 hover:text-white"
+              }`}
             >
               {link.label}
             </a>
@@ -51,20 +69,24 @@ export default function Header() {
           aria-label="Open navigation menu"
           aria-expanded={menuOpen}
         >
-          <span className="block h-0.5 w-6 bg-navy" />
-          <span className="block h-0.5 w-6 bg-navy" />
-          <span className="block h-0.5 w-6 bg-navy" />
+          <span className={`block h-0.5 w-6 transition-colors duration-300 ${scrolled ? "bg-navy" : "bg-white"}`} />
+          <span className={`block h-0.5 w-6 transition-colors duration-300 ${scrolled ? "bg-navy" : "bg-white"}`} />
+          <span className={`block h-0.5 w-6 transition-colors duration-300 ${scrolled ? "bg-navy" : "bg-white"}`} />
         </button>
       </div>
 
       {/* ── Contact Strip (desktop) ──────────────────────── */}
-      <div className="hidden border-t border-navy/10 lg:block">
-        <div className="mx-auto flex max-w-[var(--container-max)] items-center justify-center gap-8 px-[var(--section-pad-x)] py-1.5 text-xs text-navy/70">
+      <div className={`hidden border-t lg:block transition-colors duration-300 ${
+        scrolled ? "border-navy/10" : "border-white/15"
+      }`}>
+        <div className={`mx-auto flex max-w-[var(--container-max)] items-center justify-center gap-8 px-[var(--section-pad-x)] py-1.5 text-xs transition-colors duration-300 ${
+          scrolled ? "text-navy/70" : "text-white/65"
+        }`}>
           {LOCATIONS.map((loc) => (
             <a
               key={loc.id}
               href={`tel:${loc.phone}`}
-              className="transition-colors hover:text-navy"
+              className={`transition-colors ${scrolled ? "hover:text-navy" : "hover:text-white"}`}
             >
               {loc.city}: {loc.phone}
             </a>
@@ -72,7 +94,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ── Mobile Menu Overlay ──────────────────────────── */}
+      {/* ── Mobile Menu Overlay ──────────────────── */}
       {menuOpen && (
         <div className="fixed inset-0 z-50 flex flex-col bg-[#f9f9f9] lg:hidden">
           {/* Close */}

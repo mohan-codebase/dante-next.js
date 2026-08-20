@@ -16,15 +16,12 @@ import Footer from "./components/Footer";
 import MobileActionBar from "./components/MobileActionBar";
 import AnimatedStrip from "./components/AnimatedStrip";
 
-import TopBar from "./components/TopBar";
-
 export default function Home() {
   return (
     <>
-      <TopBar />
       <Header />
+      <Hero />
       <main className="flex-1">
-        <Hero />
         <AnimatedStrip />
         <Mission />
         <Top10Things />
